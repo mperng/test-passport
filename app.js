@@ -18,8 +18,10 @@ var app = express();
 // Configuring Passport
 var passport = require('passport');
 // session handling with express-session
-var expressSession = require('express-session');
-app.use(expressSession({secret: 'mySecretKey'}));
+var session = require('express-session');
+app.use(session({secret: 'mySecretKey',
+                 resave: false,
+                 saveUninitialized:false}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -69,6 +71,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
